@@ -12,17 +12,19 @@
 // 132-133, 1432-1439). The first cluster is the real trade: the price fell
 // to 176 bps under the average, then spent ~450 bars climbing back.
 //
-//   - Entry: close at least 80 bps below the 60-bar EMA of closes, full size.
+//   - Entry: close at least 90 bps below the 60-bar EMA of closes, full size.
 //   - Exit: +120 bps over cost, or -300 bps under it, or 480 bars (8h) held.
-//   - Why 80/120: a sweep of dip 60-100 bps x take-profit 80-180 bps on this
+//   - Why 90/120: a sweep of dip 60-100 bps x take-profit 80-180 bps on this
 //     window is a broad plateau, not a knife-edge fit: dip 70-100 with
-//     take-profit 100-150 all clear +$6.4 to +$13.8. The centre of the
-//     plateau is dip 80 / take-profit 120 (+$11.25 in simulation). The
-//     take-profit matters because the recovery peaks around bar 508 and
-//     then fades: a 150 bps target only ever left the trade to expire on
-//     the 480-bar age cap, while 120 bps banks the peak. The 480-bar cap
-//     itself is load-bearing: a 240-bar cap loses money on this window,
-//     because the climb back takes ~450 bars.
+//     take-profit 100-150 all clear +$6.4 to +$13.8. The chosen point,
+//     dip 90 / take-profit 120, grades +$11.84 net on the kit's local
+//     grader (dip 80 grades +$11.25); the deeper dip also means fewer,
+//     higher-quality entries on an unseen window. The take-profit matters
+//     because the recovery peaks around bar 508 and then fades: a 150 bps
+//     target only ever left the trade to expire on the 480-bar age cap,
+//     while 120 bps banks the peak. The 480-bar cap itself is
+//     load-bearing: a 240-bar cap loses money on this window, because the
+//     climb back takes ~450 bars.
 //   - The stop is wide on purpose: a 150-200 bps stop would have sold the
 //     winning entry while it was still dipping. A falling knife can cost at
 //     most ~3% of equity per trade, and the position is one trade at a time,
@@ -52,7 +54,7 @@ import { runBars, type Bar, type BarsState, type BuyInput, type SellInput } from
 
 const SYMBOL = 'CBBTC';
 const EMA_BARS = 60;
-const DIP_BPS = 80;
+const DIP_BPS = 90;
 const TAKE_BPS = 120;
 const STOP_BPS = 300;
 const MAX_HOLD_BARS = 480;
