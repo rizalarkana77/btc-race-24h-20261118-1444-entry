@@ -38,6 +38,9 @@ falls well below where it has been trading, then banks the recovery.
 
 ## Files
 
-- `main.py` — the bot (Python 3.13, stdlib only)
-- `vendor/makefun_bars.py` — byte-for-byte copy of the kit's Python shim
+- `main.ts` — the bot (TypeScript, Node 22, stdlib only; the kit's
+  process grader runs Node only and this machine has no Docker, so the
+  entry ships as TypeScript — same strategy and parameters as the
+  Python draft)
+- `vendor/makefun-bars.ts` — byte-for-byte copy of the kit's TS shim
 - `LICENSE` — MIT
